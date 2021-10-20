@@ -2,7 +2,6 @@
     This is a factory class for the cashier entity within the operation of the staff in the clinic.
     Author: Khanya Gibisela (217205135)
  */
-
 package za.ac.cput.Factory;
 
 import za.ac.cput.Entity.Cashier;

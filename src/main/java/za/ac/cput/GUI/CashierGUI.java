@@ -62,7 +62,6 @@ public class CashierGUI extends JFrame implements ActionListener{
         JArea = new JTextArea();
         JScrollPane sp = new JScrollPane(JArea);
 
-
         JScrollPane scrollPane = new JScrollPane(table);
 
         btnClear = new JButton("CLEAR");

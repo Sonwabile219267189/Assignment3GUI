@@ -2,7 +2,6 @@
     This is an entity of a cashier within the operation of the staff in the clinic.
     Author: Khanya Gibisela (217205135)
  */
-
 package za.ac.cput.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

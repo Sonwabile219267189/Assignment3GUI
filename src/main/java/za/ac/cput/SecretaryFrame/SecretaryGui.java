@@ -69,11 +69,11 @@ public class SecretaryGui extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()) {
             case "View All Secretary":
-
+                 GetSecretary.main(null);
+                this.setVisible(false);
                 break;
             case "Add New Secretary":
-                AddSecretary.main(null);
-                this.setVisible(false);
+               
                 break;
             case "Update Secretary":
 

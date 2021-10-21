@@ -58,7 +58,7 @@ public class GetSecretary extends JFrame implements ActionListener {
 
     public void getAll() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addColumn("Student ID");
+        model.addColumn("Secretary ID");
         model.addColumn("First Name");
         model.addColumn("Last Name");
         model.addColumn("Salary");
@@ -73,7 +73,7 @@ public class GetSecretary extends JFrame implements ActionListener {
                 JSONObject student = secretary.getJSONObject(i);
 
                 Gson g = new Gson();
-                Secretary s = g.fromJson(student.toString(), Secretary.class);
+                Secretary s = g.fromJson(secretary.toString(), Secretary.class);
 
                 Object[] rowData = new Object[4];
                 rowData[0] = s.getId();

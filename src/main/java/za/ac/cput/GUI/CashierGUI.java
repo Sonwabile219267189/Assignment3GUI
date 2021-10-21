@@ -2,19 +2,13 @@ package za.ac.cput.GUI;
 
 import za.ac.cput.Entity.Cashier;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
-
-
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
 
 
 public class CashierGUI extends JFrame implements ActionListener{
@@ -23,13 +17,17 @@ public class CashierGUI extends JFrame implements ActionListener{
     private JPanel panelNorth;
     private JPanel panelCenter;
     private JPanel panelSouth;
+    private JPanel panelEast;
+    private JPanel panelWest;
 
     private JButton btnClear;
     private JButton btnAddItem ;
-    private JButton btnHome;
+    private JButton btnLogOut;
     private JButton btnInvoice;
     private JButton btnReport;
     private JButton btnVoid;
+
+    private JButton btnReceipt;
 
 
     private JLabel lblItem;
@@ -39,70 +37,95 @@ public class CashierGUI extends JFrame implements ActionListener{
     private JLabel lblSubtotal;
     private JLabel lblTotal;
 
-    private JTextArea JArea ;
-    private JTable table ;
+    private JTextField txtItem ;
+    private JTextField txtQTY;
+    private JTextField txtUnitPrice;
+    private JTextField txtDiscount;
+    private JTextField txtSubtotal;
+    private JTextField txtTotal;
 
+    private JTextArea JArea;
+
+    private String Item, Qty, UnitPrice,Discount,Subtotal,Total;
 
     public CashierGUI(){
         super("Cashier");
         panelNorth = new JPanel();
         panelCenter = new JPanel();
         panelSouth = new JPanel();
+        panelEast = new JPanel();
+        panelWest = new JPanel();
 
         lblItem = new JLabel("Item");
-        lblItem.setAlignmentX(JLabel.LEFT_ALIGNMENT);
-        lblItem.setHorizontalAlignment(JLabel.LEFT);
+        txtItem = new JTextField();
 
         lblQTY= new JLabel("Qty");
+        txtQTY= new JTextField();
+
         lblUnitPrice = new JLabel("UnitPrice");
+        txtUnitPrice = new JTextField();
+
         lblDiscount = new JLabel("Discount");
+        txtDiscount = new JTextField();
+
         lblSubtotal = new JLabel("Subtotal");
+        txtSubtotal = new JTextField();
+
         lblTotal = new JLabel("Total");
+        txtTotal = new JTextField();
 
-        JArea = new JTextArea();
-        JScrollPane sp = new JScrollPane(JArea);
+        btnReceipt = new JButton("Receipt");
 
-        JScrollPane scrollPane = new JScrollPane(table);
+        JArea = new JTextArea("No Items Scanned");
+
+
 
         btnClear = new JButton("CLEAR");
-        btnHome = new JButton("HOME");
         btnAddItem= new JButton("ADD ITEM");
         btnInvoice = new JButton("INVOICE");
         btnReport = new JButton("REPORT");
         btnVoid = new JButton("VOID");
+        btnLogOut = new JButton("LOG OUT");
     }
 
     public void setGUI() {
         panelSouth.setLayout(new FlowLayout());
-        panelCenter.setLayout(new GridLayout(15, 1));
+        panelCenter.setLayout(new GridLayout(7,1));
+        panelEast.setLayout(new FlowLayout());
+        panelWest.setLayout(new GridLayout(6,0));
         panelNorth.setLayout(new FlowLayout());
+
+
+        panelWest.add(lblItem);
+        panelWest.add(lblQTY);
+        panelWest.add(lblUnitPrice);
+        panelWest.add(lblDiscount);
+        panelWest.add(lblSubtotal);
+        panelWest.add(lblTotal);
+
+        panelCenter.add(txtItem);
+        panelCenter.add(txtQTY);
+        panelCenter.add(txtUnitPrice);
+        panelCenter.add(txtDiscount);
+        panelCenter.add(txtSubtotal);
+        panelCenter.add(txtTotal);
+        panelCenter.add(btnReceipt);
 
         panelSouth.add(btnClear);
         panelSouth.add(btnAddItem);
-        panelSouth.add(btnHome);
         panelSouth.add(btnInvoice);
         panelSouth.add(btnReport);
-
-         panelCenter.add(JArea);
-
-        String[] columnNames = {"Item", "Qty", "Unit Price","Discount","Subtotal","Total"};
-        Object[] data = {"Vicks","1","R20.00","0.00" ,"R20.00","R20.00"};
-
-        panelNorth.add(lblItem);
-        panelNorth.add(lblQTY);
-        panelNorth.add(lblUnitPrice);
-        panelNorth.add(lblDiscount);
-        panelNorth.add(lblSubtotal);
-        panelNorth.add(lblTotal);
-
+        panelSouth.add(btnLogOut);
 
         this.add(panelNorth, BorderLayout.NORTH);
         this.add(panelCenter, BorderLayout.CENTER);
         this.add(panelSouth, BorderLayout.SOUTH);
+        this.add(panelEast, BorderLayout.EAST);
+        this.add(panelWest, BorderLayout.WEST);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         btnClear.addActionListener(this);
-        btnHome.addActionListener(this);
+        btnLogOut.addActionListener(this);
         btnAddItem.addActionListener(this);
         btnReport.addActionListener(this);
         btnInvoice.addActionListener(this);
@@ -114,13 +137,48 @@ public class CashierGUI extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
-        if(e.getSource()== btnClear){
-            JArea.setText("");
+        if(e.getSource() == btnReceipt){
+            txtItem.getText();
+            txtQTY.getText();
+            txtUnitPrice.getText();
+            txtDiscount.getText();
+            txtSubtotal.getText();
+            txtTotal.getText();
+            JOptionPane.showMessageDialog(null,"Printing out Receipt");
+
+
         }
-         if ((e.getActionCommand().equals("ADD ITEM"))){
-        System.exit(0);
+        else if(e.getSource()== btnClear){
+            txtItem.setText("");
+            txtQTY.setText("");
+            txtUnitPrice.setText("");
+            txtDiscount.setText("");
+            txtSubtotal.setText("");
+            txtTotal.setText("");
+        }
+        else if (e.getSource()==btnAddItem){
+            txtItem.setText("Mist Alba");
+            txtQTY.setText("2");
+            txtUnitPrice.setText("R25.00");
+            txtDiscount.setText("R0.00");
+            txtSubtotal.setText("R50.00");
+            txtTotal.setText("R50.00");
+        }
+        else if (e.getSource()==btnInvoice){
+            JOptionPane.showMessageDialog(null,"Printing out Invoice");
+        }
+        else if (e.getSource()==btnReport){
+            JOptionPane.showMessageDialog(null,"Added to the list of payments that needs to be reported to management");
+        }
+        else if (e.getSource() == btnVoid){
+            JOptionPane.showMessageDialog(null,"Payment Void ");
+        }
+        else if(e.getSource()==btnLogOut){
+            JOptionPane.showMessageDialog(null,"You are logged out");
+            System.exit(0);
+        }
+
+
     }
-
-
 }
-}
+
